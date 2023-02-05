@@ -38,7 +38,6 @@ isoseq3 collapse mapped.s.bam awk.collapse.gff
 
 ##### c. Homology evidence
 ###### UniProt Swissprot [Canonical and Isoforms]
-
 ```
 downloaded on 2022.11.16
 uniprot_sprot-2022.11.16.fasta:568363  # canonical
