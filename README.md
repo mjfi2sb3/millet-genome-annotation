@@ -37,7 +37,63 @@ isoseq3 collapse mapped.s.bam awk.collapse.gff
 ```
 
 ##### c. Homology evidence
+###### UniProt Swissprot [Canonical and Isoforms]
 
+```
+downloaded on 2022.11.16
+uniprot_sprot-2022.11.16.fasta:568363  # canonical
+uniprot_sprot_varsplic-2022.11.16.fasta:40853  # isoforms
+```
+```bash
+-rw-r--r-- 1 bougous cbrc-PrlMill_Babil  29M Oct 12 17:17 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/uniprot_sprot_varsplic-2022.11.16.fasta
+-rw-r--r-- 1 bougous cbrc-PrlMill_Babil 270M Oct 12 17:17 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/uniprot_sprot-2022.11.16.fasta
+```
+###### Pearl Millet [_Cenchrus americanus_]
+Paper: https://www.nature.com/articles/nbt.3943
+
+I could not download the protein annotation from http://gigadb.org/dataset/view/id/100192
+so I downloaded the annotation from https://cegresources.icrisat.org/data_public/PearlMillet_Genome/v1.1/ (cited in the paper) labelled as v1.1
+```
+PM.genechr.trans.pep:35791
+PM.genescf.pep:2788
+```
+```bash
+-rw-r--r-- 1 bougous cbrc-PrlMill_Babil 1.1M May 30  2016 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/PM.genescf.pep
+-rwxr-xr-x 1 bougous cbrc-PrlMill_Babil  15M May 30  2016 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/PM.genechr.trans.pep
+```
+
+##### Green Millet [_Setaria viridis_]
+Paper: https://www.nature.com/articles/s41587-020-0681-2
+
+I cannot find the annotation described in the paper so I am using the one from NCBI annotation pipeline
+https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Setaria_viridis/100/
+
+protein annotation downloaded from
+https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/4556/100/GCF_005286985.1_Setaria_viridis_v2.0/GCF_005286985.1_Setaria_viridis_v2.0_protein.faa.gz
+
+```bash
+-rw-r--r-- 1 bougous cbrc-PrlMill_Babil  21M May 25  2020 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/GCF_005286985.1_Setaria_viridis_v2.0_protein.faa
+```
+
+##### Foxtail millet [_Setaria italica_]
+https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/4555/103/GCF_000263155.2_Setaria_italica_v2.0/GCF_000263155.2_Setaria_italica_v2.0_protein.faa.gz
+
+```bash
+-rw-r--r-- 1 bougous cbrc-PrlMill_Babil  19M Dec 11  2019 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/GCF_000263155.2_Setaria_italica_v2.0_protein.faa
+```
+
+##### The elephant grass [_Cenchrus purpureus_]
+Paper: https://doi.org/10.1111/1755-0998.13271
+
+CANNOT DOWNLOAD THE ANNOTATION FROM CHINESE SERVER. I SENT AN EMAIL TO CORRESPONDING AUTHORS.
+https://download.cncb.ac.cn/gwh/Plants/Cenchrus_purpureus_Elephant_grass_cv._Purple_GWHAORA00000000/GWHAORA00000000.Protein.faa.gz
+
+##### Sorghum [_Sorghum bicolor_]
+https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/4558/101/GCF_000003195.3_Sorghum_bicolor_NCBIv3/GCF_000003195.3_Sorghum_bicolor_NCBIv3_protein.faa.gz
+
+```bash
+-rw-r--r-- 1 bougous cbrc-PrlMill_Babil  21M Dec 11  2019 /ibex/scratch/projects/c2022/Analysis2022/sb/03.maker/00.protein/GCF_000003195.3_Sorghum_bicolor_NCBIv3_protein.faa
+```
 
 #### MAKER pipeline
 ***
