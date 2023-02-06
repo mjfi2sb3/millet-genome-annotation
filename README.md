@@ -22,7 +22,7 @@ Done by Michael Abrouk. Briefly, HiFi data were assembled using hifiasm then Omn
 ##### b. EST evidence
 ###### RNA-Seq data
 This was done by Intikhab Alam. Briefly, rnaseq data were mapped on the respective genome using STAR taking into account that these rnaseq are unstranded. Assembly of transcripts was done using StringTie then merged using StringTie merge mode.
-###### ISOSEQ data
+###### Iso-Seq data
 ```bash
 # smrtlink_11.0.0.146107
 ### LIMA
@@ -119,7 +119,10 @@ sed -i 's#PgP10c0Un#PgP10cUn#g' p10k.map2.txt
 ```
 
 ##### High & Low Confidence Genes/Proteins
-I filter genes based on the following four strategies:
+I filtered genes based on the following four strategies:
+
+###### 1. based on EST evidence
+Here, we leverage RNA-seq and the Iso-Seq evidence (described above)
 
 ##### GFF3 to GTF2 conversions
 To convert GFF3 file to GTF2, I used gffread tool (part of cufflink package).
