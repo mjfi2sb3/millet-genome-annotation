@@ -99,6 +99,37 @@ https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/4558/101/GCF_000003
 
 #### Postprocessing
 ***
+##### Renaming gene IDs
+The format of the gene ids is:
+```
+awk --> PgAWc<chrom=2 digits><assembly_version=01>G<gene_number=6 digits> e.g. Gene: PgAWc0101G009464 & Transcript: PgAWc0101G009464.1
+p10k --> PgP10c<chrom=2 digits><assembly_version=01>G<gene_number=6 digits> e.g. PgP10c0101G009518 & Transcript: PgP10c0101G009518.1
+```
+Here is the code I used:
+```bash
+module load maker;
+## awk
+maker_map_ids --prefix "PgAWc|" --suffix . --abrv_gene G --abrv_tran G --iterate 1 --justify 6 awk.hm.all.r05+abinitio.gff > awk.map.txt
+cat awk.map.txt|awk -F"[-_]" '{print $0"\t|"$2}' |sed 's#\t|Pg#|#g' |awk -F"|" '{print $1"0"$3"01"$2}' > awk.map2.txt
+sed -i 's#PgAWc0Un#PgAWcUn#g' awk.map2.txt
+## p10k
+maker_map_ids --prefix "PgP10c|" --suffix . --abrv_gene G --abrv_tran G --iterate 1 --justify 6 P10K.hm.all+abinitio.r05+abinitio.gff > p10k.map.txt
+cat p10k.map.txt|awk -F"[-_]" '{print $0"\t|"$2}' |sed 's#\t|Pg#|#g' |awk -F"|" '{print $1"0"$3"01"$2}' > p10k.map2.txt
+sed -i 's#PgP10c0Un#PgP10cUn#g' p10k.map2.txt
+```
+
+##### High & Low Confidence Genes/Proteins
+I filter genes based on the following four strategies:
+
+##### GFF3 to GTF2 conversions
+To convert GFF3 file to GTF2, I used gffread tool (part of cufflink package).
+
+```bash
+gffread -T -o P10K.hm.all+abinitio.r05+abinitio.newIDs.gtf P10K.hm.all+abinitio.r05+abinitio.newIDs.gff
+gffread -T -o awk.hm.all.r05+abinitio.newIDs.gtf awk.hm.all.r05+abinitio.newIDs.gff
+```
+
+For more info, refer to http://ccb.jhu.edu/software/stringtie/gff.shtml
 
 #### Bibliography
 ***
