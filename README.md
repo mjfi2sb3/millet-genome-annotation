@@ -152,6 +152,7 @@ I used the 2nd and 3rd values (>0.3) to keep HC genes.
 2. I removed redundancy using bbtools' dedup.sh script [<sup>[4]</sup>](https://sourceforge.net/projects/bbmap/).
 
 ```bash
+module load bbtools/v38.98;
 dedupe.sh in=est.merged.awk+p10k.fasta out=est.merged.awk+p10k.dedup3.fasta minidentity=90
 ```
 3. predict Open Reading Frames (ORFS) using TransDecoder [<sup>[5]</sup>](https://github.com/TransDecoder/TransDecoder). Note that although we have unstranded RNA-seq data, using STAR's `outSAMstrandField intronMotif` was able to recover strandness for the majority of assembled transcripts.

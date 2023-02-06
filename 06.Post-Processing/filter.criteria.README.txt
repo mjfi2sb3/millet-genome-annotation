@@ -1,0 +1,2 @@
+## KEGG based bitscore >=60
+awk -F"\t" '$NF>=60 {print}' p10k.dmnd.kegg.tsv|cut -f1|sort|uniq > p10k.prot.filt_kegg.txt
