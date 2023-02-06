@@ -1,0 +1,2 @@
+sbatch --mem=0 --qos=urg-bougous -J maker_awk_r1 -N 15 -n300 -t 4-00:00:00 --mail-user=salim.bougouffa@kaust.edu.sa --mail-type=END --output=slurm-maker-r01-awk-%j.err --wrap="/ibex/scratch/bougous/kaust_research/babili/millet/apps/mpich-3.3.2/bin/mpiexec -hosts=\$SLURM_JOB_NODELIST -n 300 /ibex/scratch/bougous/kaust_research/babili/millet/apps/maker-3.01.03/bin/maker -c 1 -base awk_maker_r1 -fix_nucleotides  maker_opts_r01.ctl maker_bopts.ctl maker_exe.ctl"
+
