@@ -14,7 +14,7 @@ The following data are required for a decent gene annotation excercise:
 
 - [x] A genome assembly
 - [x] EST data: assembled RNASeq and/or ISOSEQ data from different plant tissues and under different conditions
-- [x] Homology data: good quality proteomes of closely related species. One should also use the UniProt Swissprot dataset <sup>[2](urlhttps://www.uniprot.org/uniprotkb?facets=reviewed%3Atrue&query=%2A)</sup>.
+- [x] Homology data: good quality proteomes of closely related species. One should also use the UniProt Swiss-Prot dataset <sup>[2](urlhttps://www.uniprot.org/uniprotkb?facets=reviewed%3Atrue&query=%2A)</sup>.
 
 ### 1. Genome assemblies
 Done by Michael Abrouk. Briefly, HiFi data were assembled using hifiasm then OmniC data were used to scaffold and validate the higjhly contiguous hifiasm assembly.
@@ -41,7 +41,7 @@ isoseq3 collapse mapped.s.bam awk.collapse.gff
 ```
 
 ### 3. Homology evidence
-#### 3.1 UniProt Swissprot [Canonical and Isoforms]
+#### 3.1 UniProt Swiss-Prot [Canonical and Isoforms]
 ```
 downloaded on 2022.11.16
 uniprot_sprot-2022.11.16.fasta:568363  # canonical
@@ -123,7 +123,7 @@ sed -i 's#PgP10c0Un#PgP10cUn#g' p10k.map2.txt
 ```
 
 ### 2. High & Low Confidence Genes/Proteins
-I filtered genes into High Confidence (HC) and Low Confidence (LC) based on the following four strategies:
+I filtered genes into High Confidence (HC) and Low Confidence (LC) based on the following four strategies. The final list of HC genes/proteins was the union between the four strategies below. LC genes are those genes that are left.
 
 #### 2.1. based on EST evidence
 Here, we leverage RNA-seq and the Iso-Seq evidence ([described above](#b-est-evidence)) to build support for predicted gene models. We do so using two sub-stratgies: 1) Using MAKER QI scores and 2) Aligment-based
@@ -198,6 +198,7 @@ interproscan.sh \
 I BLASTp-ed the MAKER-predicted proteome for both pealr millets against the reviewed UniProt Swiss-Prot dataset <sup>[[2](https://www.uniprot.org/help/downloads)]</sup>  (downloaded 2022.11.16) with `--query-cover  80 --subject-cover 80 --min-score 60` parameters.
 
 ```bash
+module load diamond/2.1.0 
 nohup diamond blastp --query-cover  80 --subject-cover 80 --min-score 60  -d ../../uniprot_sprot_ALL_2022.11.16 -q awk.hm.all.r05+abinitio.all.maker.proteins.newIDs.fasta -o awk.dmnd.sprot.bs60.qc80.sc80.tsv > nohup.awk.dmnd.sprot.qc80.sc80.bs60.log &
 ```
 
