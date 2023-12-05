@@ -102,28 +102,48 @@ https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/4558/101/GCF_000003
 ***
 ```mermaid
 graph TD
-  subgraph cluster_input_data
-    A[Masked Genome Assembly]
-    B[IsoSeq Transcripts]
-    C[RNA-Seq Assembled Transcripts]
-    D[Protein Data (Closely Related Species)]
+  subgraph "Main Input"
+    A1[[Masked Genome Assembly]]    
   end
 
-  subgraph cluster_gene_prediction
-    E[Augustus Gene Prediction (Maize Model)]
+  subgraph "Guiding Input"
+    A2(Iso-Seq Transcripts)
+    A3(RNA-Seq Transcripts)
+    A4(Protein Data)
   end
 
-  subgraph cluster_functional_annotation
-    F[Gene Prediction]
-    G[Functional Annotation]
-  end
+  P1{BLASTn}
+  P2{BLASTp}
+  P3{Exonerate}
 
-  A -->|Masked Genome| E
-  B -->|IsoSeq Transcripts| E
-  C -->|RNA-Seq Transcripts| E
-  D -->|Protein Data| E
-  E --> F
-  F --> G
+  A1 -.->|reference|P1
+  A2 -->|query|P1
+  A3 --> |query|P1
+  P1 -->P3
+  P2 --> P3
+  A4 -->|query|P2
+  A1 -.->|reference|P2
+
+  B1[(Iso-Seq Mapping)]
+  B2[(RNA-Seq Mapping)]
+  B3[(Protein Mapping)]
+
+  P3 -->|polish|B1
+  P3 -->|polish|B2
+  P3 -->|polish|B3
+
+  P4{Augustus}
+  
+  B1 --> |"Create Hints"| P4
+  B2 --> |"Create Hints"| P4
+  B3 --> |"Create Hints"| P4
+
+  A1 -.->|reference|P4
+
+  C1[(Gene Models)]
+
+  P4 -->|species=maize|C1
+  C1 --> |"assess & fix w/ Maker"|C1
 ```
 
 ## III. Postprocessing
