@@ -147,7 +147,7 @@ graph TD
 ```
 The **workflow** above gives an overall description of the MAKER2 modules that we used in this genome annotation effort. We ran the MAKER2 workflow in a HPC envrinment on KAUST Ibex compute cluster. We made full use of parallelisation through the MPICH integration. Below is an example submission job. I would like to emphasise that I had numerous failed jobs due various reasons including: out of memory errors (hence the SLURM mem specification below) and other random errors that seem to be related to the filesystem.
 
-```
+```bash
 #!/bin/bash
 #SBATCH -n 30
 #SBATCH -N1
