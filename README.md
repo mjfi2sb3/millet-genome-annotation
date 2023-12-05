@@ -100,6 +100,31 @@ https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/4558/101/GCF_000003
 
 ## II. MAKER pipeline
 ***
+```mermaid
+graph TD
+  subgraph cluster_input_data
+    A[Masked Genome Assembly]
+    B[IsoSeq Transcripts]
+    C[RNA-Seq Assembled Transcripts]
+    D[Protein Data (Closely Related Species)]
+  end
+
+  subgraph cluster_gene_prediction
+    E[Augustus Gene Prediction (Maize Model)]
+  end
+
+  subgraph cluster_functional_annotation
+    F[Gene Prediction]
+    G[Functional Annotation]
+  end
+
+  A -->|Masked Genome| E
+  B -->|IsoSeq Transcripts| E
+  C -->|RNA-Seq Transcripts| E
+  D -->|Protein Data| E
+  E --> F
+  F --> G
+```
 
 ## III. Postprocessing
 ***
