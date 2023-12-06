@@ -145,7 +145,7 @@ graph TD
   P4 -->|species=maize|C1
   C1 --> |"assess & fix w/ Maker"|C1
 ```
-The **workflow** above gives an overall description of the MAKER2 modules that we used in this genome annotation effort. We ran the MAKER2 workflow in a HPC envrinment on KAUST Ibex compute cluster. We made full use of parallelisation through the MPICH integration. Below is an example submission job. I would like to emphasise that I had numerous failed jobs due various reasons including: out of memory errors (hence the SLURM mem specification below) and other random errors that seem to be related to the filesystem.
+The **workflow** above gives an overall description of the MAKER2 modules that we used in this genome annotation effort. We ran the MAKER2 workflow in a HPC envrinment on KAUST Ibex compute cluster. We made full use of parallelisation through the MPICH integration. Below is an example submission job. This was not without difficulty as we had many failed jobs due various reasons including: out of memory errors (hence the SLURM mem specification below) and other random errors that seem to be related to the filesystem.
 
 ```bash
 #!/bin/bash
@@ -279,6 +279,12 @@ gffread -T -o awk.hm.all.r05+abinitio.newIDs.gtf awk.hm.all.r05+abinitio.newIDs.
 ```
 
 For more info, refer to http://ccb.jhu.edu/software/stringtie/gff.shtml
+
+# clamt genomic region in pearl millet populations
+We observed the absence of the genomic region on chromosome 2 in the P10 pearl millet (positive strand: 246,837,020-247,539,730) containing the clamt genes within the Aw pearl millet genome. This prompts the question of whether the presence or absence of this region can be determined across pearl millet populations. To investigate this, we utilized publicly-available whole genome resequencing and GBS data from a diverse population of pearl millets. The following diagram describes the workflow.
+
+
+
 
 ## Bibliography
 ***
