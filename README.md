@@ -13,7 +13,7 @@ The following data are required for a decent gene annotation excercise:
 
 - [x] A genome assembly
 - [x] EST data: assembled RNASeq and/or ISOSEQ data from different plant tissues and under different conditions
-- [x] Homology data: good quality proteomes of closely related species. One should also use the UniProt Swiss-Prot dataset <sup>[2](urlhttps://www.uniprot.org/uniprotkb?facets=reviewed%3Atrue&query=%2A)</sup>.
+- [x] Homology data: good quality proteomes of closely related species. One should also use the UniProt Swiss-Prot dataset <sup>[2](https://www.uniprot.org/uniprotkb?facets=reviewed%3Atrue&query=%2A)</sup>.
 
 ### 1. Genome assemblies
 Done by Michael Abrouk. Briefly, HiFi data were assembled using hifiasm then OmniC data were used to scaffold and validate the higjhly contiguous hifiasm assembly.
