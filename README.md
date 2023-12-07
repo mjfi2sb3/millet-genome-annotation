@@ -352,7 +352,7 @@ samtools index -b ${bam};
 samtools coverage -r Pg2_P10K:246.8M-247.59M -q 15 ${bam} > ${bam}.cov.txt;
 ```
 
-## Bibliography
+# Bibliography
 ***
 1. MAKER: https://www.yandell-lab.org/software/maker-p.html
 2. UniProt Swiss-Prot: https://www.uniprot.org/uniprotkb?facets=reviewed%3Atrue&query=%2A
