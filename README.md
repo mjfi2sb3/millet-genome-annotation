@@ -1,8 +1,7 @@
 # The genome annotation of two pearl millet genomes :ear_of_rice:
 ### An annotation journey using the MAKER pipeline
 
-
-[[_TOC_]]
+<!-- TOC -->
 
 ## Summary
 ***
