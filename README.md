@@ -283,8 +283,74 @@ For more info, refer to http://ccb.jhu.edu/software/stringtie/gff.shtml
 # clamt genomic region in pearl millet populations
 We observed the absence of the genomic region on chromosome 2 in the P10 pearl millet (positive strand: 246,837,020-247,539,730) containing the clamt genes within the Aw pearl millet genome. This prompts the question of whether the presence or absence of this region can be determined across pearl millet populations. To investigate this, we utilized publicly-available whole genome resequencing and GBS data from a diverse population of pearl millets. The following diagram describes the workflow.
 
+```mermaid
+flowchart TD
+  subgraph "Reference Genome"
+    A1[[P10 Pearl Millet Genome]]    
+  end
+  subgraph "SRA Archives"
+    A2[("NCBI SRA (remote)")]
+    A3[["SRP063925 archives (local)"]]
+    A4[["SRP063925 fastq (local)"]]
+  end
+  A2 --> |"prefetch (sra toolkit)"|A3
+  A3 --> |"fastq-dump --gzip --split-files"|A4
+
+  A5{"Mapping (bwa-mem2 mem)"}
+  A1 --> |"reference"|A5
+  A4 --> |"query"|A5
+
+  A6[("SAM Files")]
+  A5 --> A6
+
+  A7[("Sorted BAM Files")]
+  A6 --> |"samtools view -b | samtools sort "|A7
+
+  A8[("ROI BAM Files")]
+  A7 --> |"samtools view -b -o output.bam input.bam \
+  'Pg2_P10K:246837020-247539730'"|A8
+
+  A9[\"Chromosome-level Mean Coverage"/]
+  A10[\"ROI Mean Coverage"/]
+
+  A7 --> |"samtools coverage -q 15"|A9
+  A8 --> |"samtools coverage -q 15 -r Pg2_P10K:246.8M-247.59M"|A10
+
+  A11[("Ratios")]
+  A9 --> A11
+  A10 --> A11
+```
 
 
+```bash
+#!/bin/bash
+## Download SRA archives
+head -n3 SRR_Acc_List.txt
+SRR2489114
+SRR2489116
+SRR2489117
+
+cat SRR_Acc_List.txt | parallel -j 10 prefetch -q -f ALL --output-directory $PWD {}
+
+## SRA2FQ
+fastq-dump --gzip --split-files input.sra;
+
+## Mapping
+bwa-mem2 mem -o ${in}.sam -t 30 P10K_v1.fasta r1.fq.gz r2.fq.gz;
+
+samtools view -b -@30 -o ${in}.bam ${in}.sam && rm ${in}.sam
+samtools sort -@30-o ${in}.s.bam ${in}.bam && rm ${in}.bam
+samtools index -@30 -b ${in}.s.bam
+samtools view -@30 -b -o ${in}.Pg2_P10K_246837020-247539730.bam ${in}.s.bam "Pg2_P10K:246837020-247539730"
+
+bam="${in}.s.bam";
+samtools index -b ${bam};
+samtools coverage -q 15 ${bam} > ${bam}.cov.txt;
+
+bam="${in}.Pg2_P10K_246837020-247539730.bam";
+samtools index -b ${bam};
+samtools coverage -r Pg2_P10K:246.8M-247.59M -q 15 ${bam} > ${bam}.cov.txt;
+```
 
 ## Bibliography
 ***
